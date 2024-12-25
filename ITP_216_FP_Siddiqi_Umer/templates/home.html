@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Draft Pick Selector</title>
+</head>
+<body>
+    <h1>WELCOME TO THE NBA DATASET</h1>
+    <h3>Select a draft pick to see how many points each player drafted at that position averages</h3>
+    <form action="/results" method="POST">
+        Choose a Draft Position:
+        <select name="draft_position">
+            {% for num in pickOptions %}
+                <option value="{{ num }}">{{ num }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

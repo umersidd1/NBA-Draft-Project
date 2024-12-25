@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Results</title>
+</head>
+<body>
+    <h1>Prediction for Draft Position {{ pick_number }} in Year {{ predict_year }}</h1>
+    {% if plot %}
+    <img src="data:image/png;base64,{{ plot }}" alt="Prediction Plot">
+    {% else %}
+    <p>No prediction available.</p>
+    {% endif %}
+
+    {% if custom_prediction %}
+    <p>Predicted Points Per Game for Year {{ predict_year }}: {{ "%.2f"|format(custom_prediction) }}</p>
+    {% endif %}
+
+
+    {% if predicted_ppg %}
+    <h2>Predicted Points Per Game for Future Years</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Predicted PPG</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(future_years|length) %}
+            <tr>
+                <td>{{ future_years[i] }}</td>
+                <td>{{ "%.2f"|format(predicted_ppg[i]) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

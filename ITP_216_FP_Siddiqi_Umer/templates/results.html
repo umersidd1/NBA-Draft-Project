@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draft Pick Results</title>
+</head>
+<body>
+    <h1>Draft Position {{ pick_number }} Results</h1>
+
+    <!-- Custom Year Prediction Form -->
+    <div class="prediction-form">
+        <h3>Predict Points Per Game for a Specific Year</h3>
+        <form action="/prediction" method="POST">
+            <!-- Hidden input to pass draft pick position -->
+            <input type="hidden" name="draft_position" value="{{ pick_number }}">
+
+            <!-- Label and input for year -->
+            <label for="predict_year">Enter Year to Predict:</label>
+            <input type="number" id="predict_year" name="predict_year">
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+
+    {% if plot %}
+    <img src="data:image/png;base64,{{ plot }}" alt="Draft Pick Performance">
+    {% endif %}
+
+    <h2>Players Drafted at Position {{ pick_number }}</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Draft Year</th>
+                <th>Points Per Game</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in data %}
+            <tr>
+                <td>{{ player.Player }}</td>
+                <td>{{ player.DraftYr }}</td>
+                <td>{{ player.PPG }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
